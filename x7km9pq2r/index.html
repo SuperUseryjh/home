@@ -100,7 +100,7 @@
     点击次数: <span id="clickCount">0</span>
   </div>
   <div class="image-wrapper" id="clickArea">
-    <img src="./111.jpg" alt="?" id="puzzleImg" draggable="false">
+    <img src="./111.png" alt="?" id="puzzleImg" draggable="false">
   </div>
   <div class="click-hint">我不道啊，你爱点你就点呗</div>
   <div class="ascii-area" id="asciiArea">
@@ -110,49 +110,7 @@
 </div>
 
 <script>
-  var N1 = 77;
-  var N2 = 233;
-  var ZIP_URL = 'https://static.yaoonion.fun/puzzle/enlarge.zip';
-  var INVISIBLE_TEXT = '\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200C\u200B\u200B\u200B\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200C\u200C\u200C\u200B\u200B\u200B\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C';
-
-  var counter = 0;
-  var countEl = document.getElementById('clickCount');
-  var imgWrapper = document.getElementById('clickArea');
-  var imgEl = document.getElementById('puzzleImg');
-  var asciiArea = document.getElementById('asciiArea');
-  var invisibleContainer = document.getElementById('invisibleContainer');
-  var zipTriggered = false;
-  var asciiRevealed = false;
-
-  function updateDisplay() {
-    countEl.textContent = counter;
-  }
-
-  function handleClick() {
-    if (asciiRevealed) return;
-    counter++;
-
-    if (counter === N1 && !zipTriggered) {
-      zipTriggered = true;
-      updateDisplay();
-      window.open(ZIP_URL, '_blank');
-    }
-
-    if (counter === N2) {
-      asciiRevealed = true;
-      if (imgWrapper) imgWrapper.style.display = 'none';
-      var hint = document.querySelector('.click-hint');
-      if (hint) hint.style.display = 'none';
-      asciiArea.classList.add('visible');
-      invisibleContainer.textContent = INVISIBLE_TEXT;
-      updateDisplay();
-      return;
-    }
-
-    updateDisplay();
-  }
-
-  imgWrapper.addEventListener('click', handleClick);
+var N1 = 0x4D;var N2 = 0xE9;var _0x7d = function(_0x1e){return _0x1e.split('').reverse().join('')}('piz.egralne/elzzup/nuf.noinooay.cits//:sptth');var _0x3a = [8203,8204,8203,8203,8204,8204,8204,8203,8203,8204,8204,8203,8204,8203,8204,8203,8203,8204,8203,8204,8203,8204,8204,8203,8203,8204,8204,8203,8204,8203,8204,8203,8203,8204,8203,8203,8204,8204,8204,8203,8203,8204,8203,8203,8203,8204,8203,8203,8203,8204,8204,8203,8203,8203,8204,8204,8203,8203,8204,8204,8203,8203,8203,8204,8203,8204,8203,8203,8204,8204,8204,8203,8203,8204,8203,8203,8203,8204,8204,8204,8203,8204,8203,8203,8203,8204,8203,8204,8203,8203,8204,8204,8203,8204,8203,8204,8203,8204,8203,8203,8204,8204,8204,8203,8203,8204,8204,8203,8204,8203,8204,8203,8203,8204,8203,8204,8204,8203,8204,8203,8203,8204,8204,8203,8204,8203,8204,8204,8203,8204,8203,8203,8204,8204,8204,8203,8203,8204,8204,8204,8204,8203,8204,8203,8203,8204,8203,8204,8203,8204,8203,8204,8203,8204,8204,8204,8204,8203,8203,8203,8203,8204,8203,8204,8204,8203,8204,8203,8203,8204,8203,8204,8203,8203,8203,8204,8203,8203,8204,8204,8204,8204,8203,8204,8203,8203,8204,8204,8204,8204,8203,8204];var _0x4b = String.fromCharCode.apply(null, _0x3a);var counter = 0;var _0x1f = document.getElementById('clickCount');var _0x2c = document.getElementById('clickArea');var _0x3e = document.getElementById('puzzleImg');var _0x4a = document.getElementById('asciiArea');var _0x5b = document.getElementById('invisibleContainer');var _0x6c = false;var _0x7e = false;function _0x8a() {_0x1f.textContent = counter;}function _0x9b() {if (_0x7e) return;counter = counter + 1;if (counter === N1 && !_0x6c) {_0x6c = true;_0x8a();window.open(_0x7d, '_blank');}if (counter === N2) {_0x7e = true;if (_0x2c) _0x2c.style.display = 'none';var _0x0a = document.querySelector('.click-hint');if (_0x0a) _0x0a.style.display = 'none';_0x4a.classList.add('visible');_0x5b.textContent = _0x4b;_0x8a();return;}_0x8a();}_0x2c.addEventListener('click', _0x9b);
 </script>
 </body>
 </html>
