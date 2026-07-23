@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>滚木</title>
+<title>∞ 无 穷 之 门 ∞</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -95,7 +95,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>啊？我不道啊</h1>
+  <h1>✦ 无 穷 之 门 ✦</h1>
   <div class="counter-display">
     点击次数: <span id="clickCount">0</span>
   </div>
@@ -121,24 +121,25 @@
   var imgEl = document.getElementById('puzzleImg');
   var asciiArea = document.getElementById('asciiArea');
   var invisibleContainer = document.getElementById('invisibleContainer');
-  var redirected = false;
+  var zipTriggered = false;
+  var asciiRevealed = false;
 
   function updateDisplay() {
     countEl.textContent = counter;
   }
 
   function handleClick() {
-    if (redirected) return;
+    if (asciiRevealed) return;
     counter++;
 
-    if (counter === N1) {
-      redirected = true;
+    if (counter === N1 && !zipTriggered) {
+      zipTriggered = true;
       updateDisplay();
-      window.location.href = ZIP_URL;
-      return;
+      window.open(ZIP_URL, '_blank');
     }
 
     if (counter === N2) {
+      asciiRevealed = true;
       imgWrapper.style.display = 'none';
       document.querySelector('.click-hint').style.display = 'none';
       asciiArea.classList.add('visible');
