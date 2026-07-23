@@ -100,8 +100,9 @@
     点击次数: <span id="clickCount">0</span>
   </div>
   <div class="image-wrapper" id="clickArea">
-    <img src="./111.jpg" alt="?" id="puzzleImg" draggable="false">
+    <img src="./111.png" alt="?" id="puzzleImg" draggable="false">
   </div>
+  <div class="click-hint">我不道啊，你爱点你就点呗</div>
   <div class="ascii-area" id="asciiArea">
     <div class="label">ASCII</div>
     <div class="invisible-container" id="invisibleContainer"></div>
@@ -139,8 +140,9 @@
 
     if (counter === N2) {
       asciiRevealed = true;
-      imgWrapper.style.display = 'none';
-      document.querySelector('.click-hint').style.display = 'none';
+      if (imgWrapper) imgWrapper.style.display = 'none';
+      var hint = document.querySelector('.click-hint');
+      if (hint) hint.style.display = 'none';
       asciiArea.classList.add('visible');
       invisibleContainer.textContent = INVISIBLE_TEXT;
       updateDisplay();
