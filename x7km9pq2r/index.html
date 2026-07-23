@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>滚木</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #07070c;
+    color: #b0b0c0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 500px;
+    position: relative;
+  }
+  h1 {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 1rem;
+    color: #5a7a9a;
+    font-weight: 300;
+  }
+  .counter-display {
+    font-size: 0.8rem;
+    color: #3a4a5a;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+  .image-wrapper {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: transform 0.1s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .image-wrapper:active {
+    transform: scale(0.96);
+  }
+  .image-wrapper img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+    border: 1px solid #1a1a28;
+    border-radius: 4px;
+  }
+  .click-hint {
+    font-size: 0.75rem;
+    color: #3a4a5a;
+    margin-top: 1rem;
+  }
+  .ascii-area {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #1a2a1a;
+    background: #0a0a12;
+  }
+  .ascii-area.visible {
+    display: block;
+  }
+  .ascii-area .label {
+    font-size: 1.1rem;
+    letter-spacing: 0.4em;
+    color: #5a8a5a;
+    margin-bottom: 1rem;
+  }
+  .ascii-area .hint-text {
+    font-size: 0.8rem;
+    color: #4a6a4a;
+    margin-bottom: 1rem;
+  }
+  .invisible-container {
+    line-height: 1;
+    font-size: 0;
+    word-break: break-all;
+    min-height: 2em;
+    padding: 0.5em;
+    background: #050508;
+    border: 1px dashed #1a2a1a;
+  }
+  #clickCount {
+    color: #6a8aaa;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>啊？我不道啊</h1>
+  <div class="counter-display">
+    点击次数: <span id="clickCount">0</span>
+  </div>
+  <div class="image-wrapper" id="clickArea">
+    <img src="./111.jpg" alt="?" id="puzzleImg" draggable="false">
+  </div>
+  <div class="ascii-area" id="asciiArea">
+    <div class="label">ASCII</div>
+    <div class="hint-text">两种不可见字符 · 0 与 1</div>
+    <div class="invisible-container" id="invisibleContainer"></div>
+  </div>
+</div>
+
+<script>
+  var N1 = 77;
+  var N2 = 233;
+  var ZIP_URL = 'https://static.yaoonion.fun/puzzle/enlarge.zip';
+  var INVISIBLE_TEXT = '\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200C\u200B\u200B\u200B\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200B\u200B\u200B\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200B\u200C\u200C\u200C\u200C\u200B\u200B\u200B\u200B\u200C\u200B\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200B\u200C\u200B\u200B\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C\u200B\u200B\u200C\u200C\u200C\u200C\u200B\u200C';
+
+  var counter = 0;
+  var countEl = document.getElementById('clickCount');
+  var imgWrapper = document.getElementById('clickArea');
+  var imgEl = document.getElementById('puzzleImg');
+  var asciiArea = document.getElementById('asciiArea');
+  var invisibleContainer = document.getElementById('invisibleContainer');
+  var redirected = false;
+
+  function updateDisplay() {
+    countEl.textContent = counter;
+  }
+
+  function handleClick() {
+    if (redirected) return;
+    counter++;
+
+    if (counter === N1) {
+      redirected = true;
+      updateDisplay();
+      window.location.href = ZIP_URL;
+      return;
+    }
+
+    if (counter === N2) {
+      imgWrapper.style.display = 'none';
+      document.querySelector('.click-hint').style.display = 'none';
+      asciiArea.classList.add('visible');
+      invisibleContainer.textContent = INVISIBLE_TEXT;
+      updateDisplay();
+      return;
+    }
+
+    updateDisplay();
+  }
+
+  imgWrapper.addEventListener('click', handleClick);
+</script>
+</body>
+</html>
